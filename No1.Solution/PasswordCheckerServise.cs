@@ -10,8 +10,6 @@ namespace No1.Solution
     {
         protected readonly IRepository repository;
 
-        Func<string, bool> validator;
-
         public PasswordCheckerServise(IRepository repository)
         {
             if (repository==null)
