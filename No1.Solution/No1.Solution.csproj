@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountPasswordCheckerServise.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="PasswordCheckerServise.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

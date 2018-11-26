@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace No1.Solution
 {
-    public abstract class PasswordCheckerServise
+    public class PasswordCheckerServise
     {
         protected readonly IRepository repository;
+
+        Func<string, bool> validator;
 
         public PasswordCheckerServise(IRepository repository)
         {
@@ -19,6 +21,20 @@ namespace No1.Solution
             this.repository = repository;
         }
 
-        public abstract (bool, string) VerifyPassword(string password);
+        public (bool, string) VerifyPassword(string password,params Func<string,bool>[] validators)
+        {
+            if (validators.Length==0)
+            {
+                throw new ArgumentException($"{nameof(validators)} can't be null");
+            }
+            foreach(Func<string,bool> validator in validators)        
+            {
+                if (!validator(password))
+                {
+                    return (false, "Incorrect password");
+                }
+            }
+            return (true, "Correct Password");
+        }
     }
 }

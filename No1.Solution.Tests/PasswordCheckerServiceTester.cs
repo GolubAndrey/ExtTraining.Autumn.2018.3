@@ -14,25 +14,25 @@ namespace No1.Solution.Tests
         [Test]
         public void PasswordCheckerService_NullRepository_ArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(()=>new AccountPasswordCheckerServise(null));
+            Assert.Throws<ArgumentNullException>(()=>new PasswordCheckerServise(null));
         }
         
         [Test]
         public void PasswordCheckerService_ValideString()
         {
             SqlRepository repository = new SqlRepository();
-            PasswordCheckerServise passwordCheckerServise = new AccountPasswordCheckerServise(repository);
+            PasswordCheckerServise passwordCheckerServise = new PasswordCheckerServise(repository);
 
-            Assert.True(passwordCheckerServise.VerifyPassword("a1dasdss").Item1);
+            Assert.True(passwordCheckerServise.VerifyPassword("asdasd", (string t) => t.Length > 5, (string t) => t.Length <7).Item1);
         }
 
         [Test]
         public void PasswordCheckerService_InvalideString()
         {
             SqlRepository repository = new SqlRepository();
-            PasswordCheckerServise passwordCheckerServise = new AccountPasswordCheckerServise(repository);
+            PasswordCheckerServise passwordCheckerServise = new PasswordCheckerServise(repository);
 
-            Assert.False(passwordCheckerServise.VerifyPassword("a1d").Item1);
+            Assert.False(passwordCheckerServise.VerifyPassword("asd",(string t)=>t.Length>5).Item1);
         }
     }
 }
