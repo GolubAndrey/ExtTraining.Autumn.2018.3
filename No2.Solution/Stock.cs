@@ -5,26 +5,24 @@ namespace No2
 {
     public class Stock : IObservable
     {
-        private StockInfo stocksInfo;
+        private delegate void StocksHandler(StockInfo info);
 
-        private readonly List<IObserver> observers;
+        private event StocksHandler OnNotify;
+
+        private StockInfo stocksInfo;
 
         public Stock()
         {
-            observers = new List<IObserver>();
             stocksInfo = new StockInfo();
         }
 
-        public void Register(IObserver observer) => observers.Add(observer);
+        public void Register(IObserver observer)=> OnNotify += observer.Update;
 
-        public void Unregister(IObserver observer) => observers.Remove(observer);
+        public void Unregister(IObserver observer) => OnNotify-=observer.Update;
 
         public void Notify()
         {
-            foreach (IObserver o in observers)
-            {
-                o.Update(stocksInfo);
-            }
+            OnNotify(stocksInfo);
         }
 
         public void Market()
