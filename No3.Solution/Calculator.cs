@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using No3;
 
 namespace No3.Solution
 {
@@ -21,7 +22,7 @@ namespace No3.Solution
             return calculator.Calculate(values);
         }
 
-        public double CalculateAverageWithEnum(List<double> values , AveragingMethod method)
+        public double CalculateAverageWithEnum(List<double> values , No3.AveragingMethod method)
         {
             CalculatorCreator calculatorCreator = new CalculatorCreator();
             if (values == null)

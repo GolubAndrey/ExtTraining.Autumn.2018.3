@@ -32,5 +32,13 @@ namespace No3.Solution.Tests
 
             Assert.AreEqual(expected, actual, 0.000001);
         }
+
+        [TestCase(No3.AveragingMethod.Mean,8.3636363)]
+        [TestCase(No3.AveragingMethod.Median,8.0)]
+        public  void AverageCalculatorTests_ValidEnum(AveragingMethod method,double result)
+        {
+            Calculator calculator = new Calculator();
+            Assert.AreEqual(result, calculator.CalculateAverageWithEnum(values, method), 0.000001);
+        }
     }
 }
